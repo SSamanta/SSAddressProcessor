@@ -13,12 +13,12 @@
 int main()
 {
     std::string processAddress (std:: string input);
-    std::string input ;//= "ARIJIT, 192 POST OFFICE, SUITE";
-    std ::cout << "Enter Your String";
-    std::cin >> input;
+    std::string input ;// = "ARIJIT, 192 POST OFFICE, SUITE";
+    std::cout << "Enter your string:";
+    std::getline(std::cin, input);
     std::string output = processAddress(input);
     std::cout << output << "\n";
-    return 0;
+    return 1;
 }
 
 std::string processAddress (std:: string input) {
@@ -59,6 +59,6 @@ void replaceAll(std::string& str, const std::string& from, const std::string& to
     size_t start_pos = 0;
     while((start_pos = str.find(from, start_pos)) != std::string::npos) {
         str.replace(start_pos, from.length(), to);
-        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+        start_pos += to.length();
     }
 }
