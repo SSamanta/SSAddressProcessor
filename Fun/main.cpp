@@ -12,19 +12,19 @@
 #include <map>
 int main()
 {
-    char * processAddress (char *input );
-    char *input = "ARIJIT, 192 POST OFFICE, SUITE";
-    char *output = processAddress(input);
+    std::string processAddress (std:: string input);
+    std::string input ;//= "ARIJIT, 192 POST OFFICE, SUITE";
+    std ::cout << "Enter Your String";
+    std::cin >> input;
+    std::string output = processAddress(input);
     std::cout << output << "\n";
     return 0;
 }
 
-char * processAddress (char *input ) {
-    char *output = input;
-    
+std::string processAddress (std:: string input) {
+    void replaceAll(std::string& str, const std::string& from, const std::string& to);
     std::ifstream file("LookUp.csv");
     std::string str;
-    //std::map<std::string, std::string> myMap;
     typedef std::map<std::string, std::string> MyMap;
     MyMap my_map;
     while (std::getline(file, str))
@@ -35,12 +35,30 @@ char * processAddress (char *input ) {
         my_map[token1] = token2;
     }
     // Map Enumeration
-    for( MyMap::const_iterator it = my_map.begin(); it != my_map.end(); ++it )
+    for( MyMap::const_iterator it = my_map.end(); it != my_map.begin(); --it )
     {
         std::string key = it->first;
         std::string value = it->second;
-        std:: cout << key << " : " << value << "\n";
+        // find and replace
+        replaceAll(input, key, value);
     }
     
+    std::string output = input ;
     return output;
+}
+bool replace(std::string& str, const std::string& from, const std::string& to) {
+    size_t start_pos = str.find(from);
+    if(start_pos == std::string::npos)
+        return false;
+    str.replace(start_pos, from.length(), to);
+    return true;
+}
+void replaceAll(std::string& str, const std::string& from, const std::string& to) {
+    if(from.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
 }
