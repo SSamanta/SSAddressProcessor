@@ -7,12 +7,24 @@
 //
 
 #include <iostream>
-
-int main(int argc, const char * argv[])
+#include <fstream>
+int main()
 {
-
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    void processAddress (std::string input);
+    std:: string input;
+    std::getline(std:: cin, input);
+    processAddress(input);
     return 0;
 }
 
+std::string processAddress (std::string input) {
+    std::ifstream file("LookUp.csv");
+    std::string str;
+    while (std::getline(file, str))
+    {
+        std:: cout << str << '\n';
+    }
+    
+    std:: cout << input;
+    return input;
+}
