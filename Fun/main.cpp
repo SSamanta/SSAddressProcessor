@@ -8,23 +8,31 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <map>
 int main()
 {
-    void processAddress (std::string input);
-    std:: string input;
-    std::getline(std:: cin, input);
-    processAddress(input);
+    char * processAddress (char *input );
+    char *input = "ARIJIT, 192 POST OFFICE, SUITE";
+    char *output = processAddress(input);
+    std::cout << output;
     return 0;
 }
 
-std::string processAddress (std::string input) {
+char * processAddress (char *input ) {
+    char *output = input;
+    
     std::ifstream file("LookUp.csv");
     std::string str;
+    std::map<std::string, std::string> myMap;
     while (std::getline(file, str))
     {
         std:: cout << str << '\n';
+        std::string delimiter = ",";
+        std::string token1 = str.substr(0, str.find(delimiter));
+        std::string token2 = str.substr(token1.length()+1, str.find(delimiter));
+        std:: cout << token1 << token2 << '\n';
+        myMap[token1] = token2;
     }
-    
-    std:: cout << input;
-    return input;
+    return output;
 }
